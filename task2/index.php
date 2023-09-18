@@ -17,7 +17,7 @@ print_r ($x);
 
 echo "<br>";
 
-#
+# integer data type
 $y = 88 ; 
 echo $y , gettype($y);
 var_dump($y);
