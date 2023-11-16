@@ -1,0 +1,71 @@
+1- 
+SELECT CONCAT(employees.first_name, ' ', employees.last_name) AS full_name,
+       departments.department_name,
+       locations.city,
+       regions.region_name
+FROM employees , departments , locations , countries , regions 
+WHERE employees.department_id = departments.department_id
+  AND departments.location_id = locations.location_id
+  AND locations.country_id = countries.country_id
+  AND countries.region_id = regions.region_id;
+
+================================================================================================================
+
+2-
+SELECT
+  countries.country_name,
+  (
+    SELECT COUNT(departments.department_id)
+    FROM departments, locations
+    WHERE locations.location_id = departments.location_id
+      AND locations.country_id = countries.country_id
+  ) AS department_count
+FROM countries;
+
+========================================================================================
+3-
+
+
+
+
+
+
+
+
+
+
+
+
+=================================================================================================================
+4-
+
+SELECT DATEDIFF(CURRENT_DATE, '1998-08-08') / 365 AS years,
+       MOD(DATEDIFF(CURRENT_DATE, '1998-08-08'), 365) AS days,
+      MOD(DATEDIFF(CURRENT_DATE, '1998-08-08'), 103 / 30) AS months;
+
+
+
+
+
+
+
+
+=====================================
+5-
+
+
+SELECT
+  countries.country_id,
+  (
+    SELECT IFNULL(SUM(employees.salary), 'not found')
+    FROM employees, departments, locations
+    WHERE departments.location_id = locations.location_id
+      AND employees.department_id = departments.department_id
+      AND locations.country_id = countries.country_id
+  ) AS total_salary
+FROM countries;
+
+
+
+
+
